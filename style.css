@@ -105,11 +105,22 @@ header {
 .ticker-content {
     display: inline-block;
     white-space: nowrap;
-    animation: ticker 45s linear infinite;
+    animation: ticker 30s linear infinite;
     font-weight: 500;
     font-size: 14px;
     padding: 0 20px;
 }
+
+@keyframes ticker {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
 .ticker-pause-icon {
     padding: 0 14px;
     font-size: 13px;
