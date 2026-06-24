@@ -761,3 +761,14 @@ h2::before {
     }
 
 }
+
+.reveal {
+  opacity: 0 !important;
+  transform: translateY(45px) !important;
+  transition: all 0.8s ease !important;
+}
+
+.reveal.is-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
