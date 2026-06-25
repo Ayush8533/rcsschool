@@ -6,7 +6,6 @@
     <title>RCS Senior Secondary School | Sirauli, Bareilly</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="animations.css">
 </head>
 <body>
 
@@ -92,6 +91,58 @@
         </ul>
     </nav>
 
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="images/Schoolbuilding.jpg.jpeg" alt="RCS Senior Secondary School Building">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-inner">
+            <span class="hero-badge"><i class="fas fa-star"></i> Admission Open — Session 2026-27</span>
+            <h1 class="hero-title">
+                Shaping <span class="hero-accent">Bright Futures</span><br>
+                at RCS Senior Secondary School
+            </h1>
+            <p class="hero-subtitle">
+                Sirauli, Bareilly ka pehla school jo Regular, Distance &amp; Open Board Education ek saath deta hai —
+                gyaan, charitra aur aatmavishwaas ke saath.
+            </p>
+            <div class="hero-cta">
+                <a href="#admission" class="hero-btn hero-btn-primary">
+                    <i class="fas fa-pen"></i>&nbsp; Admission Enquiry
+                </a>
+                <a href="#gallery" class="hero-btn hero-btn-secondary">
+                    <i class="fas fa-images"></i>&nbsp; View Gallery
+                </a>
+            </div>
+        </div>
+        <a href="#stats" class="hero-scroll-cue" aria-label="Scroll Down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- ===== STATS COUNTER SECTION ===== -->
+    <section class="stats-section" id="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" data-target="500" data-suffix="+">0</div>
+                <div class="stat-label">Students</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="100" data-suffix="%">0</div>
+                <div class="stat-label">Result</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="15" data-suffix="+">0</div>
+                <div class="stat-label">Teachers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="2020" data-suffix="">0</div>
+                <div class="stat-label">Established</div>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== ABOUT US SECTION ===== -->
     <div id="about" class="content-section bg-white">
 
@@ -165,7 +216,7 @@
                 </div>
                 <p class="msg-author">
                     <strong>— Mr.Mishri Lal</strong>
-                    <span class="designation"></span>
+                    <span class="designation">Founder, RCS Senior Secondary School</span>
                 </p>
             </div>
             <div class="img-box">
@@ -189,7 +240,7 @@
                 </div>
                 <p class="msg-author">
                     <strong>— Dr. Piyush Kumar</strong>
-                    <span class="designation"></span>
+                    <span class="designation">Director, RCS Senior Secondary School</span>
                 </p>
             </div>
             <div class="img-box">
@@ -868,6 +919,45 @@
 
     <script>
     // ============================================================
+    // 0. STATS COUNTER — animate on scroll into view
+    // ============================================================
+    function animateCounter(el) {
+        const target = parseInt(el.getAttribute('data-target'), 10);
+        const suffix = el.getAttribute('data-suffix') || '';
+        const duration = 1600;
+        const startTime = performance.now();
+
+        function tick(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            // ease-out for a smooth "settle" feel
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(eased * target);
+            el.textContent = current.toLocaleString('en-IN') + suffix;
+            if (progress < 1) {
+                requestAnimationFrame(tick);
+            } else {
+                el.textContent = target.toLocaleString('en-IN') + suffix;
+            }
+        }
+        requestAnimationFrame(tick);
+    }
+
+    const statsSection = document.getElementById('stats');
+    if (statsSection) {
+        let statsAnimated = false;
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    statsAnimated = true;
+                    document.querySelectorAll('.stat-number').forEach(animateCounter);
+                    statsSection.classList.add('stats-in-view');
+                }
+            });
+        }, { threshold: 0.35 });
+        statsObserver.observe(statsSection);
+    }
+
+    // ============================================================
     // 1. NEWS TICKER — Click to Pause / Resume
     // ============================================================
     const ticker = document.getElementById('newsTicker');
@@ -1407,8 +1497,7 @@ _Sent from RCS School Website_`;
         item.classList.add('soft-animate');
     });
 
-    </script> 
+    </script>
 
-   <script src="scroll-animations.js"></script>
 </body>
 </html>
