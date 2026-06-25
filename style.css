@@ -1148,3 +1148,40 @@ footer a:hover { color: var(--gold); }
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 18px 10px; }
     .stat-number { font-size: 26px; }
 }
+
+
+/* ===== FOOTER AFFILIATION EXACT FIX ===== */
+
+.footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: start;
+}
+
+/* all footer headings */
+.footer-grid div h3 {
+    margin: 0 0 22px 0 !important;
+}
+
+/* remove default paragraph gaps */
+.footer-grid div p {
+    margin: 0 0 8px 0 !important;
+}
+
+/* ONLY affiliation content move */
+.footer-grid div:nth-child(4) h3 + p {
+    margin-top: -35px !important;
+    padding-top: 0 !important;
+}
+
+
+/* mobile */
+@media(max-width:768px){
+    .footer-grid{
+        grid-template-columns:1fr !important;
+    }
+
+    .footer-grid div:nth-child(4) h3 + p{
+        margin-top:0 !important;
+    }
+}
